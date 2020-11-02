@@ -46,7 +46,7 @@ open class MUKeychainManager {
             
             kSecClass       : kSecClassGenericPassword,
             kSecAttrAccount : key,
-            kSecReturnData  : kCFBooleanTrue,
+            kSecReturnData  : kCFBooleanTrue!,
             kSecMatchLimit  : kSecMatchLimitOne
         ])
         
