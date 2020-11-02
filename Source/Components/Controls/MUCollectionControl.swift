@@ -111,8 +111,6 @@ extension MUCollectionControl:
                 
                 return Log.error("error: cell object is nil")
             }
-
-            delegate?.cellDidSelected(for: object)
             
             delegate?.cellDidSelected(for: object, at: indexPath)
         }

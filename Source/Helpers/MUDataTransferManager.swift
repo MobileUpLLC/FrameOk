@@ -182,11 +182,6 @@ open class MUDataTransferManager: NSObject {
         
     ) {
         
-        if checkHasTestResponse() {
-            
-            return simulateFirstResponseWithDelay(success: success, failure: failure)
-        }
-        
         let defaultMethod: MUNetworkHttpMethod = parameters == nil ? .get : .post
         
         let request = MUNetworkRequest(
@@ -215,8 +210,6 @@ open class MUDataTransferManager: NSObject {
             success    : { [weak self] (result) in
                 
                 self?.removeSameFailureRequest(with: request)
-            
-                self?.handlerResponse(result: result, success: success, failure: failure)
                 
                 self?.handlerResponse(result: result, request: request, success: success, failure: failure)
             },
@@ -399,76 +392,6 @@ open class MUDataTransferManager: NSObject {
         if let index = failureRequests.firstIndex(where: { $0.method == request.method } )  {
             
             failureRequests.remove(at: index)
-        }
-    }
-}
-
-// MARK: - Test
-
-public extension MUDataTransferManager {
-    
-    // MARK: - Response
-    
-    struct Response {
-        
-        let error: Error?
-        
-        let data: Any?
-        
-        let delay: TimeInterval
-    }
-    
-    // MARK: - Private properties
-    
-    static private var responseArray: [Response] = []
-    
-    // MARK: - Public methods
-    
-    static func addResponse(withError error: Error?, delay: TimeInterval = 0) {
-        
-        responseArray.append(Response(error: error, data: nil, delay: delay))
-    }
-    
-    static func addResponse(with data: Any, delay: TimeInterval = 0) {
-        
-        responseArray.append(Response(error: nil, data: data, delay: delay))
-    }
-    
-    func checkHasTestResponse() -> Bool {
-        
-        return MUDataTransferManager.responseArray.count > 0
-    }
-    
-    func simulateFirstResponseWithDelay(success: ((Any) -> Void)? = nil, failure: ((Error?) -> Void)? = nil) {
-        
-        guard let response = MUDataTransferManager.responseArray.first else { return }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + response.delay) { [weak self] in
-            
-            self?.simulateFirstResponse(success: success, failure: failure)
-        }
-    }
-    
-    func simulateFirstResponse(success: ((Any) -> Void)? = nil, failure: ((Error?) -> Void)? = nil) {
-        
-        guard let response = MUDataTransferManager.responseArray.first else { return }
-        
-        MUDataTransferManager.responseArray.remove(at: 0)
-        
-        if let error = response.error {
-            
-            handleFailure(
-                
-                result     : nil,
-                error      : error as? MUNetworkError,
-                request    : nil,
-                recipient  : MUErrorManager.recipient,
-                completion : failure
-            )
-            
-        } else if let data = response.data {
-            
-            handlerResponse(result: data, success: success, failure: failure)
         }
     }
 }

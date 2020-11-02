@@ -286,7 +286,7 @@ extension MUFormController: MUTextFieldViewDelegate {
             
             let isSubview: Bool = (object.field as? UIView)?.allSubviews().contains(textFieldView) ?? false
             
-            guard isSubview || (object.field is VerifyFieldProtocol), (object.field as? UIView) == textFieldView else { continue }
+            guard isSubview, (object.field as? UIView) == textFieldView else { continue }
             
             validate(validation: fieldsValidation)
             

@@ -83,33 +83,32 @@ open class MUView: UIView {
             
             if innerShadowLayer == nil {
                 
-                innerShadowLayer = CALayer()
-                
-                if let innerShadowLayer = innerShadowLayer {
-                    
-                    innerShadowLayer.frame = self.bounds
+                let innerShadowLayer = CALayer()
 
-                    let rect = innerShadowLayer.bounds.insetBy(
-                        dx: innerShadowBoundsInset.width,
-                        dy: innerShadowBoundsInset.height
-                    )
-                    
-                    let path = UIBezierPath(rect: rect)
-                    
-                    let cutout = UIBezierPath(rect: innerShadowLayer.bounds).reversing()
-                    
-                    path.append(cutout)
-                    
-                    innerShadowLayer.shadowPath = path.cgPath
-                    innerShadowLayer.masksToBounds = innerShadowMaskToBounds
-                    innerShadowLayer.shadowColor = innerShadowColor.cgColor
-                    innerShadowLayer.shadowOffset = innerShadowOffset
-                    innerShadowLayer.shadowOpacity = innerShadowOpacity
-                    innerShadowLayer.shadowRadius = innerShadowRadius
-                    innerShadowLayer.cornerRadius = self.cornerRadius
-                    
-                    self.layer.addSublayer(innerShadowLayer)
-                }
+                innerShadowLayer.frame = self.bounds
+
+                let rect = innerShadowLayer.bounds.insetBy(
+                    dx: innerShadowBoundsInset.width,
+                    dy: innerShadowBoundsInset.height
+                )
+
+                let path = UIBezierPath(rect: rect)
+
+                let cutout = UIBezierPath(rect: innerShadowLayer.bounds).reversing()
+
+                path.append(cutout)
+
+                innerShadowLayer.shadowPath = path.cgPath
+                innerShadowLayer.masksToBounds = innerShadowMaskToBounds
+                innerShadowLayer.shadowColor = innerShadowColor.cgColor
+                innerShadowLayer.shadowOffset = innerShadowOffset
+                innerShadowLayer.shadowOpacity = innerShadowOpacity
+                innerShadowLayer.shadowRadius = innerShadowRadius
+                innerShadowLayer.cornerRadius = self.cornerRadius
+
+                self.layer.addSublayer(innerShadowLayer)
+                
+                self.innerShadowLayer = innerShadowLayer
             }
         } else {
             

@@ -165,7 +165,7 @@ open class MUListController: MUViewController, MUListControlDelegate, MUReusable
     
     @objc open func hideActivityIndicators() {
         
-        hideActivityIndicator()
+        isLoading = false
         
         refreshControl.stopAnimation()
         
@@ -221,7 +221,7 @@ open class MUListController: MUViewController, MUListControlDelegate, MUReusable
         
         if withIndicator {
             
-            showActivityIndicator()
+            isLoading = true
         }
         
         beginRequest()

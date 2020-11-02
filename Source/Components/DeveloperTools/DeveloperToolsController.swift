@@ -229,7 +229,7 @@ public extension MUDeveloperToolsManager {
             
         } else {
             
-            guard let controller = DeveloperToolsController.getInstantiate() else { return }
+            guard let controller = DeveloperToolsController.getInstantiate(with: DeveloperToolsController.self) else { return }
 
             MUPopupControl.closeAll()
             
@@ -244,7 +244,7 @@ public extension MUDeveloperToolsManager {
 
 public extension UIWindow {
     
-    override open func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         
         if DeveloperToolsController.isEnabled == true && motion == .motionShake {
             

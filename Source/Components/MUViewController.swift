@@ -162,8 +162,6 @@ open class MUViewController: UIViewController {
 
     func appErrorDidBecome(error: Error) {
 
-        hideActivityIndicator()
-
         isLoading = false
     }
 
@@ -318,7 +316,6 @@ public extension MUViewController {
         }
     }
 
-    @available(*, deprecated, message: "Use getInstantiate(with:)")
     static func getInstantiate<T: MUViewController>() -> T? {
 
         guard storyboardName != "" else {

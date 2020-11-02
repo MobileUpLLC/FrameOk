@@ -208,8 +208,8 @@ extension UIView {
 
             switch type {
 
-            case .width  : widthAnchor.constraint(equalToConstant  : value)
-            case .height : heightAnchor.constraint(equalToConstant : value)
+            case .width  : widthAnchor.constraint(equalToConstant : value).isActive = true
+            case .height : heightAnchor.constraint(equalToConstant : value).isActive = true
             default      : break
             }
         }
