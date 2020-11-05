@@ -55,8 +55,8 @@
 		E6B91A5B2550136100DE968B /* MUCollectionControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B91A152550136100DE968B /* MUCollectionControl.swift */; };
 		E6B91A5C2550136100DE968B /* MUEmptyStateControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B91A162550136100DE968B /* MUEmptyStateControl.swift */; };
 		E6B91A5D2550136100DE968B /* MUBehaviorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B91A172550136100DE968B /* MUBehaviorController.swift */; };
-		E6B91A5E2550136100DE968B /* DeveloperToolsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B91A192550136100DE968B /* DeveloperToolsController.swift */; };
-		E6B91A5F2550136100DE968B /* LogsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B91A1A2550136100DE968B /* LogsController.swift */; };
+		E6B91A5E2550136100DE968B /* MUDeveloperToolsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B91A192550136100DE968B /* MUDeveloperToolsController.swift */; };
+		E6B91A5F2550136100DE968B /* MULogsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B91A1A2550136100DE968B /* MULogsController.swift */; };
 		E6B91A602550136100DE968B /* DeveloperTools.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6B91A1B2550136100DE968B /* DeveloperTools.storyboard */; };
 		E6B91A612550136100DE968B /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6B91A1D2550136100DE968B /* Media.xcassets */; };
 		E6B91A622550136100DE968B /* FrameOk.h in Headers */ = {isa = PBXBuildFile; fileRef = E6B91A1E2550136100DE968B /* FrameOk.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -132,8 +132,8 @@
 		E6B91A152550136100DE968B /* MUCollectionControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUCollectionControl.swift; sourceTree = "<group>"; };
 		E6B91A162550136100DE968B /* MUEmptyStateControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUEmptyStateControl.swift; sourceTree = "<group>"; };
 		E6B91A172550136100DE968B /* MUBehaviorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUBehaviorController.swift; sourceTree = "<group>"; };
-		E6B91A192550136100DE968B /* DeveloperToolsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeveloperToolsController.swift; sourceTree = "<group>"; };
-		E6B91A1A2550136100DE968B /* LogsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogsController.swift; sourceTree = "<group>"; };
+		E6B91A192550136100DE968B /* MUDeveloperToolsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUDeveloperToolsController.swift; sourceTree = "<group>"; };
+		E6B91A1A2550136100DE968B /* MULogsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MULogsController.swift; sourceTree = "<group>"; };
 		E6B91A1B2550136100DE968B /* DeveloperTools.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DeveloperTools.storyboard; sourceTree = "<group>"; };
 		E6B91A1D2550136100DE968B /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		E6B91A1E2550136100DE968B /* FrameOk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameOk.h; sourceTree = "<group>"; };
@@ -324,8 +324,8 @@
 		E6B91A182550136100DE968B /* DeveloperTools */ = {
 			isa = PBXGroup;
 			children = (
-				E6B91A192550136100DE968B /* DeveloperToolsController.swift */,
-				E6B91A1A2550136100DE968B /* LogsController.swift */,
+				E6B91A192550136100DE968B /* MUDeveloperToolsController.swift */,
+				E6B91A1A2550136100DE968B /* MULogsController.swift */,
 				E6B91A1B2550136100DE968B /* DeveloperTools.storyboard */,
 			);
 			path = DeveloperTools;
@@ -513,13 +513,13 @@
 				E6B91A362550136100DE968B /* Character.swift in Sources */,
 				E6B91A3D2550136100DE968B /* Encodable.swift in Sources */,
 				E6B91A5C2550136100DE968B /* MUEmptyStateControl.swift in Sources */,
-				E6B91A5E2550136100DE968B /* DeveloperToolsController.swift in Sources */,
+				E6B91A5E2550136100DE968B /* MUDeveloperToolsController.swift in Sources */,
 				E6B91A4E2550136100DE968B /* MUReusableControllerProvider.swift in Sources */,
 				E6B91A3A2550136100DE968B /* NSAttributedString.swift in Sources */,
 				E6B91A9B255019E400DE968B /* MUView.swift in Sources */,
 				E6B91A702550136100DE968B /* MUCacheManager.swift in Sources */,
 				E6B91A5D2550136100DE968B /* MUBehaviorController.swift in Sources */,
-				E6B91A5F2550136100DE968B /* LogsController.swift in Sources */,
+				E6B91A5F2550136100DE968B /* MULogsController.swift in Sources */,
 				E6B91A452550136100DE968B /* UIViewController.swift in Sources */,
 				E6B91A472550136100DE968B /* UIImageView.swift in Sources */,
 				E6B91A582550136100DE968B /* MUPaginationControl.swift in Sources */,

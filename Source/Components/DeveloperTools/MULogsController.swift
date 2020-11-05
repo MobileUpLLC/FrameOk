@@ -10,7 +10,7 @@ import UIKit
 
 // MARK: - LogsController
 
-class LogsController: MUViewController {
+class MULogsController: MUViewController {
 
     // MARK: - Overriden properties
     

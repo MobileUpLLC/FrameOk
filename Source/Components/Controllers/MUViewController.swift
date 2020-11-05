@@ -626,16 +626,16 @@ open class MUViewControllerContainer {
 
 public extension UIViewController {
 
-    static func instantiate() -> Self {
+    static func instantiate(bundle: Bundle? = nil) -> Self {
 
-        let controller = Self(nibName: String(describing: self), bundle: nil)
+        let controller = Self(nibName: String(describing: self), bundle: bundle)
 
         return controller
     }
 
-    static func instantiate(storyboardName: String, identifier: String) -> Self? {
+    static func instantiate(storyboardName: String, identifier: String, bundle: Bundle? = nil) -> Self? {
 
-        let storyboard: UIStoryboard = UIStoryboard(name: storyboardName, bundle: nil)
+        let storyboard: UIStoryboard = UIStoryboard(name: storyboardName, bundle: bundle)
 
         return storyboard.instantiateViewController(withIdentifier: identifier) as? Self
     }

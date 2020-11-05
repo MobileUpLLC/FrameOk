@@ -28,12 +28,12 @@ public protocol MUDeveloperToolsDelegate: class {
 
 public protocol MUDeveloperToolsCustomActionDelegate: class {
 
-    func developerToolCustomActionDidTapped(_ developerTools: DeveloperToolsController)
+    func developerToolCustomActionDidTapped(_ developerTools: MUDeveloperToolsController)
 }
 
-// MARK: - DeveloperToolsController  
+// MARK: - MUDeveloperToolsController
 
-open class DeveloperToolsController: MUViewController {
+open class MUDeveloperToolsController: MUViewController {
     
     // MARK: - Overriden properties
     
@@ -216,20 +216,20 @@ public extension MUDeveloperToolsManager {
     
     static func show(with topController: UIViewController) {
         
-        if topController.isKind(of: LogsController.self) {
+        if topController.isKind(of: MULogsController.self) {
             
             topController.dismiss(animated: true, completion: nil)
             
             return
         }
         
-        if topController.isKind(of: DeveloperToolsController.self) {
+        if topController.isKind(of: MUDeveloperToolsController.self) {
             
             topController.dismiss(animated: true, completion: nil)
             
         } else {
             
-            guard let controller = DeveloperToolsController.getInstantiate(with: DeveloperToolsController.self) else { return }
+            guard let controller = MUDeveloperToolsController.instantiate(storyboardName: "DeveloperTools", identifier: "MUDeveloperToolsController", bundle: Bundle(for: self)) else { return }
 
             MUPopupControl.closeAll()
             
@@ -246,7 +246,7 @@ public extension UIWindow {
     
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         
-        if DeveloperToolsController.isEnabled == true && motion == .motionShake {
+        if MUDeveloperToolsController.isEnabled == true && motion == .motionShake {
             
             Log.event("Device have been shaken.")
             

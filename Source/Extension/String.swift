@@ -14,8 +14,10 @@ import PhoneNumberKit
 public extension String {
     
     // MARK: - Public properties
+
+    static var bundle: Bundle = Constants.bundle
     
-    var localize: String { return Constants.bundle.localizedString(forKey: self, value: "", table: nil) }
+    var localize: String { return String.bundle.localizedString(forKey: self, value: "", table: nil) }
     
     // MARK: - Public properties
     
