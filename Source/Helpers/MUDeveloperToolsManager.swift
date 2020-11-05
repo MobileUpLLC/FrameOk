@@ -14,6 +14,8 @@ open class MUDeveloperToolsManager: NSObject {
     
     // MARK: - Public properties
 
+    public static var isEnabled: Bool = false
+
     public static weak var delegate: MUDeveloperToolsDelegate?
 
     public static weak var customActionDelegate: MUDeveloperToolsCustomActionDelegate?

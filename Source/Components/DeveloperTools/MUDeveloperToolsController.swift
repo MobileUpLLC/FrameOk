@@ -38,8 +38,6 @@ open class MUDeveloperToolsController: MUViewController {
     // MARK: - Overriden properties
     
     public override class var storyboardName: String { return "DeveloperTools" }
-
-    public static var isEnabled: Bool = false
     
     // MARK: - Private properties
     
@@ -246,7 +244,7 @@ public extension UIWindow {
     
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         
-        if MUDeveloperToolsController.isEnabled == true && motion == .motionShake {
+        if MUDeveloperToolsManager.isEnabled == true && motion == .motionShake {
             
             Log.event("Device have been shaken.")
             
