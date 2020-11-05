@@ -325,7 +325,6 @@
 			children = (
 				E6B91A192550136100DE968B /* MUDeveloperToolsController.swift */,
 				E6B91A1A2550136100DE968B /* MULogsController.swift */,
-				E6B91A1B2550136100DE968B /* DeveloperTools.storyboard */,
 			);
 			path = DeveloperTools;
 			sourceTree = "<group>";
@@ -337,6 +336,7 @@
 				E6B91A1E2550136100DE968B /* FrameOk.h */,
 				E6B91A9D25501A3C00DE968B /* FrameOkError.swift */,
 				E6B91AA725501CB900DE968B /* Constants.swift */,
+				E6B91A1B2550136100DE968B /* DeveloperTools.storyboard */,
 			);
 			path = Support;
 			sourceTree = "<group>";
