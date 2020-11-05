@@ -17,6 +17,7 @@ Pod::Spec.new do |spec|
   
   spec.source = { :git => 'https://github.com/MobileUpLLC/FrameOK.git', :tag => spec.version.to_s }
   spec.source_files  = "Source/", "Source/**/*.{swift}"
+  spec.resources     = "Source/Support", "Source/Support/**/*.*"
   spec.module_name   = 'FrameOk'
 
   spec.dependency 'Alamofire', '~> 4.9'
