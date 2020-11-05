@@ -20,11 +20,11 @@ Pod::Spec.new do |spec|
   spec.module_name   = 'FrameOk'
 
   spec.dependency 'Alamofire', '~> 4.9'
-  spec.dependency 'AlamofireNetworkActivityIndicator', '~> 2.4'
+  spec.dependency 'AlamofireNetworkActivityIndicator'
   spec.dependency 'AlamofireNetworkActivityLogger'
   spec.dependency 'Kingfisher'
   spec.dependency 'PhoneNumberKit'
-  spec.dependency 'XCGLogger', '~> 6.1.0'
+  spec.dependency 'XCGLogger'
   spec.dependency 'GCDWebServer', '~> 3.0'
   spec.dependency 'SkeletonView'
   spec.dependency 'SwiftEntryKit'
