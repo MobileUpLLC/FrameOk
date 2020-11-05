@@ -14,9 +14,9 @@ open class MUDeveloperToolsManager: NSObject {
     
     // MARK: - Public properties
 
-    public static weak var delegate: DeveloperToolsDelegate?
+    public static weak var delegate: MUDeveloperToolsDelegate?
 
-    public static weak var customActionDelegate: DeveloperToolsCustomActionDelegate?
+    public static weak var customActionDelegate: MUDeveloperToolsCustomActionDelegate?
     
     public class var alwaysReturnConnectionError: Bool {
         

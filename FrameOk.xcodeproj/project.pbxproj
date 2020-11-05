@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		86227071C00F219589260867 /* Pods_FrameOk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3196FAC57D3192261A7E66F /* Pods_FrameOk.framework */; };
+		E68BB4EC255183740074D4E4 /* MUDevelopData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68BB4EB255183740074D4E4 /* MUDevelopData.swift */; };
 		E6B91A302550136100DE968B /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B919E82550136100DE968B /* UIScrollView.swift */; };
 		E6B91A312550136100DE968B /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B919E92550136100DE968B /* CALayer.swift */; };
 		E6B91A322550136100DE968B /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B919EA2550136100DE968B /* Date.swift */; };
@@ -83,6 +84,7 @@
 		2219BADA9AF5639973522B55 /* Pods-FrameOk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FrameOk.release.xcconfig"; path = "Target Support Files/Pods-FrameOk/Pods-FrameOk.release.xcconfig"; sourceTree = "<group>"; };
 		B2FF1B4C95A94724D8C0E14D /* Pods-FrameOk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FrameOk.debug.xcconfig"; path = "Target Support Files/Pods-FrameOk/Pods-FrameOk.debug.xcconfig"; sourceTree = "<group>"; };
 		B3196FAC57D3192261A7E66F /* Pods_FrameOk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FrameOk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E68BB4EB255183740074D4E4 /* MUDevelopData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MUDevelopData.swift; sourceTree = "<group>"; };
 		E6B919482550127F00DE968B /* FrameOk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FrameOk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6B919E82550136100DE968B /* UIScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScrollView.swift; sourceTree = "<group>"; };
 		E6B919E92550136100DE968B /* CALayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
@@ -185,6 +187,44 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E68BB4E7255182FE0074D4E4 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E6B91A062550136100DE968B /* MUViewController.swift */,
+				E6B91A082550136100DE968B /* MUFormController.swift */,
+				E6B91A092550136100DE968B /* MUListController.swift */,
+				E6B91A172550136100DE968B /* MUBehaviorController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		E68BB4E8255183130074D4E4 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				E6B91A072550136100DE968B /* MUReusableControllerProvider.swift */,
+				E6B91AA125501B3000DE968B /* MUTextFieldViewDelegate.swift */,
+				E6B91AA425501B3F00DE968B /* MUTextFieldViewProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		E68BB4E9255183290074D4E4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E6B91A0B2550136100DE968B /* MUModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E68BB4EA255183320074D4E4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E6B91A9A255019E400DE968B /* MUView.swift */,
+				E6B91A0A2550136100DE968B /* MUCustomView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		E6B9193E2550127F00DE968B = {
 			isa = PBXGroup;
 			children = (
@@ -254,18 +294,12 @@
 		E6B91A052550136100DE968B /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				E6B91A9A255019E400DE968B /* MUView.swift */,
-				E6B91A062550136100DE968B /* MUViewController.swift */,
-				E6B91A072550136100DE968B /* MUReusableControllerProvider.swift */,
-				E6B91A082550136100DE968B /* MUFormController.swift */,
-				E6B91A092550136100DE968B /* MUListController.swift */,
-				E6B91A0A2550136100DE968B /* MUCustomView.swift */,
-				E6B91A0B2550136100DE968B /* MUModel.swift */,
+				E68BB4EA255183320074D4E4 /* Views */,
+				E68BB4E9255183290074D4E4 /* Models */,
+				E68BB4E8255183130074D4E4 /* Protocols */,
+				E68BB4E7255182FE0074D4E4 /* Controllers */,
 				E6B91A0C2550136100DE968B /* Controls */,
-				E6B91A172550136100DE968B /* MUBehaviorController.swift */,
 				E6B91A182550136100DE968B /* DeveloperTools */,
-				E6B91AA125501B3000DE968B /* MUTextFieldViewDelegate.swift */,
-				E6B91AA425501B3F00DE968B /* MUTextFieldViewProtocol.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -312,18 +346,19 @@
 		E6B91A202550136100DE968B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				E6B91A212550136100DE968B /* MUErrorManager.swift */,
-				E6B91A222550136100DE968B /* MUBehaviorManager.swift */,
-				E6B91A232550136100DE968B /* MUDataTransferManager.swift */,
-				E6B91A242550136100DE968B /* MUNetworkManager.swift */,
 				E6B91A252550136100DE968B /* MUAuthenticationManager.swift */,
-				E6B91A272550136100DE968B /* MUWebLogsManager.swift */,
-				E6B91A282550136100DE968B /* MUDeveloperToolsManager.swift */,
-				E6B91A2A2550136100DE968B /* MUValidateManager.swift */,
-				E6B91A2C2550136100DE968B /* MUKeychainManager.swift */,
+				E6B91A222550136100DE968B /* MUBehaviorManager.swift */,
 				E6B91A2D2550136100DE968B /* MUCacheManager.swift */,
+				E6B91A232550136100DE968B /* MUDataTransferManager.swift */,
+				E6B91A282550136100DE968B /* MUDeveloperToolsManager.swift */,
+				E6B91A212550136100DE968B /* MUErrorManager.swift */,
+				E6B91A2C2550136100DE968B /* MUKeychainManager.swift */,
 				E6B91A2E2550136100DE968B /* MULogManager.swift */,
+				E6B91A242550136100DE968B /* MUNetworkManager.swift */,
 				E6B91A2F2550136100DE968B /* MUSerializationManager.swift */,
+				E6B91A2A2550136100DE968B /* MUValidateManager.swift */,
+				E6B91A272550136100DE968B /* MUWebLogsManager.swift */,
+				E68BB4EB255183740074D4E4 /* MUDevelopData.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -492,6 +527,7 @@
 				E6B91A3B2550136100DE968B /* UIView+Constraints.swift in Sources */,
 				E6B91A522550136100DE968B /* MUModel.swift in Sources */,
 				E6B91A3F2550136100DE968B /* UITableView.swift in Sources */,
+				E68BB4EC255183740074D4E4 /* MUDevelopData.swift in Sources */,
 				E6B91A682550136100DE968B /* MUAuthenticationManager.swift in Sources */,
 				E6B91A592550136100DE968B /* MUKeyboardControl.swift in Sources */,
 				E6B91A562550136100DE968B /* MUActivityIndicatorControl.swift in Sources */,

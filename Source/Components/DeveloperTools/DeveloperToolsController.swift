@@ -16,17 +16,17 @@ public struct MUEnvironment {
     let title: String
 }
 
-// MARK: - DeveloperToolsDelegate
+// MARK: - MUDeveloperToolsDelegate
 
-public protocol DeveloperToolsDelegate: class {
+public protocol MUDeveloperToolsDelegate: class {
 
     func developerToolsEnvironmentArray() -> [MUEnvironment]
     func developerToolsDidEnvironmentChanged(with environment: MUEnvironment)
 }
 
-// MARK: - DeveloperToolsCustomActionDelegate
+// MARK: - MUDeveloperToolsCustomActionDelegate
 
-public protocol DeveloperToolsCustomActionDelegate: class {
+public protocol MUDeveloperToolsCustomActionDelegate: class {
 
     func developerToolCustomActionDidTapped(_ developerTools: DeveloperToolsController)
 }
