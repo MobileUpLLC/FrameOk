@@ -11,7 +11,7 @@ Pod::Spec.new do |spec|
 
   spec.authors      = { "Dmitry Smirnov, MobileUp" => "ds@mobileup.ru", "Maxim Aliev, MobileUp" => "ma@mobileup.ru", "Ilia Biltuev, MobileUp" => "ib@mobileup.ru", "Nikolai Timonin, MobileUp" => "nt@mobileup.ru", "Pavel Petrovich, MobileUp" => "pp@mobileup.ru" }
 
-  spec.platform     = :ios, "9.0"
+  spec.platform     = :ios, "10.0"
   spec.ios.frameworks = 'UIKit'
   spec.swift_version = ['4.2', '5']
   
