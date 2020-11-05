@@ -137,7 +137,6 @@
 		E6B91A1B2550136100DE968B /* DeveloperTools.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DeveloperTools.storyboard; sourceTree = "<group>"; };
 		E6B91A1D2550136100DE968B /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		E6B91A1E2550136100DE968B /* FrameOk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameOk.h; sourceTree = "<group>"; };
-		E6B91A1F2550136100DE968B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6B91A212550136100DE968B /* MUErrorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUErrorManager.swift; sourceTree = "<group>"; };
 		E6B91A222550136100DE968B /* MUBehaviorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUBehaviorManager.swift; sourceTree = "<group>"; };
 		E6B91A232550136100DE968B /* MUDataTransferManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUDataTransferManager.swift; sourceTree = "<group>"; };
@@ -336,7 +335,6 @@
 			children = (
 				E6B91A1D2550136100DE968B /* Media.xcassets */,
 				E6B91A1E2550136100DE968B /* FrameOk.h */,
-				E6B91A1F2550136100DE968B /* Info.plist */,
 				E6B91A9D25501A3C00DE968B /* FrameOkError.swift */,
 				E6B91AA725501CB900DE968B /* Constants.swift */,
 			);
@@ -674,7 +672,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/Source/Support/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -701,7 +699,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/Source/Support/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
