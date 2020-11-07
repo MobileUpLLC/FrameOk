@@ -742,14 +742,14 @@ extension MUTableControl: UIScrollViewDelegate {
 
 open class MUTableCell: UITableViewCell {
     
-    var object: MUModel?
+    open var object: MUModel?
     
-    func setup(with object: MUModel, sender: Any? = nil) {
+    open func setup(with object: MUModel, sender: Any? = nil) {
         
         self.object = object
     }
     
-    func setup(sender: Any? = nil) {
+    open func setup(sender: Any? = nil) {
         
     }
 }
@@ -765,7 +765,7 @@ open class MUControllerTableCell: MUTableCell {
 
 open class MUTableSection: UITableViewCell {
     
-    func setup(with section: String) {
+    open func setup(with section: String) {
         
     }
 }
@@ -774,5 +774,5 @@ open class MUTableSection: UITableViewCell {
 
 open class MUReserveModel: MUModel {
     
-    var cell: MUTableControl.ReserveCell!
+    open var cell: MUTableControl.ReserveCell!
 }

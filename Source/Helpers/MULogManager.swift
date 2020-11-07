@@ -194,7 +194,7 @@ open class MULogManager: NSObject {
 
 // MARK: - Log
 
-final class Log: NSObject {
+final public class Log: NSObject {
     
     // MARK: - Public methods
     
