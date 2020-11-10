@@ -126,7 +126,7 @@ open class MUViewController: UIViewController {
 
     // MARK: - Public methods
 
-    func subscribeOnNotifications() {
+    open func subscribeOnNotifications() {
 
         guard isVisible, isNotificationSubscribed == false else { return }
 
@@ -139,7 +139,7 @@ open class MUViewController: UIViewController {
         subscribeOnAppNotifications()
     }
 
-    func unsubscribeFromNotifications() {
+    open func unsubscribeFromNotifications() {
 
         isNotificationSubscribed = false
 
@@ -148,30 +148,30 @@ open class MUViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
 
-    func subscribeOnCustomNotifications() {
+    open func subscribeOnCustomNotifications() {
 
     }
 
-    func appDidBecomeActive() {
+    open func appDidBecomeActive() {
 
     }
 
-    func appWillResignActive() {
+    open func appWillResignActive() {
 
     }
 
-    func appErrorDidBecome(error: Error) {
+    open func appErrorDidBecome(error: Error) {
 
         isLoading = false
     }
 
-    func appErrorDidClear() {
+    open func appErrorDidClear() {
 
     }
 
     // MARK: - Public methods
 
-    func close(animated: Bool = true, toRoot: Bool = false, popOnly: Bool = false, completion: (() -> Void)? = nil) {
+    open func close(animated: Bool = true, toRoot: Bool = false, popOnly: Bool = false, completion: (() -> Void)? = nil) {
 
         popupControl.dismiss()
 
