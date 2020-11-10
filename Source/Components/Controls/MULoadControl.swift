@@ -194,6 +194,6 @@ public extension UIView {
 
 // MARK: - MUEmptyModel
 
-public class MUEmptyModel: MUModel {
+open class MUEmptyModel: MUModel {
 
 }
