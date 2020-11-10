@@ -57,7 +57,7 @@ public extension MUReusableControllerProvider {
         
         let type = getControllerClass(forIdentifier: id)
         
-        guard let controller = type.getInstantiate() else {
+        guard let controller = type.getInstance() else {
             
             fatalError("Unable to initialize controller with class: \(type) for reuse identifier: \(id)")
         }
