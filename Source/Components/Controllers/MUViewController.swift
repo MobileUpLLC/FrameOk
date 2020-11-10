@@ -298,7 +298,7 @@ public extension MUViewController {
         return MUViewController.viewControllersArray["\(T.self)"]?.controller as? T
     }
 
-    static func getInstantiate<T: MUViewController>(with type: T.Type) -> T? {
+    static func getInstance<T: MUViewController>(with type: T.Type) -> T? {
 
         switch T.initMethod {
         case .fromNib        : return T.instantiate()
@@ -307,7 +307,7 @@ public extension MUViewController {
         }
     }
 
-    static func getInstantiate<T: MUViewController>() -> T? {
+    static func getInstance<T: MUViewController>() -> T? {
 
         guard storyboardName != "" else {
 
@@ -339,16 +339,16 @@ public extension MUViewController {
         setup          : ((T) -> Void)? = nil
     ) {
 
-        guard let instantiate = T.getInstantiate(with: T.self) else {
+        guard let instance = T.getInstance(with: T.self) else {
 
             return
         }
 
-        setup?(instantiate)
+        setup?(instance)
 
         push(
 
-            with           : instantiate,
+            with           : instance,
             animated       : animated,
             pushCompletion : pushCompletion
         )
@@ -364,18 +364,18 @@ public extension MUViewController {
 
     ) {
 
-        guard let instantiate = T.getInstantiate(with: T.self) else {
+        guard let instance = T.getInstance(with: T.self) else {
 
             return
         }
 
-        setup?(instantiate)
+        setup?(instance)
 
-        var presentedController: UIViewController = instantiate
+        var presentedController: UIViewController = instance
 
         if withNavigation {
 
-            presentedController = instantiate.addNavigation()
+            presentedController = instance.addNavigation()
         }
 
         if let style = style {
@@ -396,16 +396,16 @@ public extension MUViewController {
         setup          : ((T) -> Void)?  = nil)
     {
 
-        guard let instantiate: T = getInstantiate() as? T  else {
+        guard let instance: T = getInstance() as? T  else {
 
-            return Log.error("failed to create instantiate for \(self)")
+            return Log.error("failed to create instance for \(self)")
         }
 
-        setup?(instantiate)
+        setup?(instance)
 
         controller?.push(
 
-            with           : instantiate,
+            with           : instance,
             animated       : animated,
             pushCompletion : pushCompletion
         )
@@ -422,26 +422,26 @@ public extension MUViewController {
 
         ) {
 
-        guard let instantiate: T = getInstantiate()  else {
+        guard let instance: T = getInstance()  else {
 
             return
         }
 
-        setup?(instantiate)
+        setup?(instance)
 
-        var presentedController: UIViewController = instantiate
+        var presentedController: UIViewController = instance
 
         if asRoot {
 
             if let navigationController = findNavigationController(storyboardName: storyboardName) {
 
-                navigationController.setViewControllers([instantiate], animated: false)
+                navigationController.setViewControllers([instance], animated: false)
 
                 presentedController = navigationController
 
             } else {
 
-                presentedController = createNavigationController(with: instantiate)
+                presentedController = createNavigationController(with: instance)
             }
         }
 
@@ -462,40 +462,40 @@ public extension MUViewController {
         setup                 : ((T) -> Void)?  = nil
     ) {
 
-        guard let instantiate: T = screen.getInstantiate() else {
+        guard let instance: T = screen.getInstance() else {
 
             return
         }
 
-        setup?(instantiate)
+        setup?(instance)
 
-        addChild(instantiate)
+        addChild(instance)
 
-        instantiate.didMove(toParent: self)
+        instance.didMove(toParent: self)
 
         if let appendTargetView = appendTargetView {
 
-            instantiate.view.frame = appendTargetView.frame
+            instance.view.frame = appendTargetView.frame
 
-            view.insertSubview(instantiate.view, aboveSubview: appendTargetView)
+            view.insertSubview(instance.view, aboveSubview: appendTargetView)
 
         } else {
 
-            (insertTargetView ?? view).addSubview(instantiate.view)
+            (insertTargetView ?? view).addSubview(instance.view)
         }
 
-        instantiate.view.appendConstraints(to: insertTargetView ?? view)
+        instance.view.appendConstraints(to: insertTargetView ?? view)
     }
 
-    func insert(controller instantiate: UIViewController, into insertTargetView: UIView? = nil) {
+    func insert(controller instance: UIViewController, into insertTargetView: UIView? = nil) {
 
-        addChild(instantiate)
+        addChild(instance)
 
-        (insertTargetView ?? view).addSubview(instantiate.view)
+        (insertTargetView ?? view).addSubview(instance.view)
 
-        instantiate.view.appendConstraints(to: insertTargetView ?? view)
+        instance.view.appendConstraints(to: insertTargetView ?? view)
 
-        instantiate.didMove(toParent: self)
+        instance.didMove(toParent: self)
     }
 
     func remove(child controller: UIViewController) {
