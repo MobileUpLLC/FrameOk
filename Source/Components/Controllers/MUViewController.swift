@@ -85,8 +85,6 @@ open class MUViewController: UIViewController {
 
         updateViewControllersArray()
 
-        configureNavigatioBar()
-
         configureInteractivePopGestureRecognizer()
 
         subscribeOnNotifications()
@@ -194,13 +192,6 @@ open class MUViewController: UIViewController {
     }
 
     // MARK: - Private methods
-
-    private func configureNavigatioBar() {
-
-        guard let hasNavigationBar = hasNavigationBar else { return }
-
-        navigationController?.setNavigationBarHidden(hasNavigationBar == false, animated: true)
-    }
 
     private func configureInteractivePopGestureRecognizer() {
 
