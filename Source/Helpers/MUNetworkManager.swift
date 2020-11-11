@@ -46,7 +46,7 @@ open class MUNetworkManager: NSObject {
     
     // MARK: - Override methods
     
-    init(serverTrustPolicies: [String: MUServerTrustPolicy]? = nil) {
+    public init(serverTrustPolicies: [String: MUServerTrustPolicy]? = nil) {
 
         let configuration = URLSessionConfiguration.default
         
@@ -318,14 +318,14 @@ public extension MUNetworkManager {
 
 public struct MUNetworkRequest {
     
-    var url      : String
-    var method   : MUNetworkHttpMethod
-    var headers  : [String : String]?   = nil
-    var params   : [String : Any]?      = nil
-    var body     : Any?                 = nil
-    var encoding : MUNetworkEncoding    = .url
-    var success  : ((Any) -> Void)?     = nil
-    var failure  : ((Error?) -> Void)?  = nil
+    public var url      : String
+    public var method   : MUNetworkHttpMethod
+    public var headers  : [String : String]?   = nil
+    public var params   : [String : Any]?      = nil
+    public var body     : Any?                 = nil
+    public var encoding : MUNetworkEncoding    = .url
+    public var success  : ((Any) -> Void)?     = nil
+    public var failure  : ((Error?) -> Void)?  = nil
 }
 
 // MARK: - MUNetworkManager
