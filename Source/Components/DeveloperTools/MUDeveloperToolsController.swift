@@ -12,8 +12,18 @@ import UIKit
 
 public struct MUEnvironment {
 
-    let index: String
-    let title: String
+    // MARK: - Public properties
+    
+    public let index: String
+    public let title: String
+    
+    // MARK: - Public methods
+    
+    init(index: String, title: String) {
+        
+        self.index = index
+        self.title = title
+    }
 }
 
 // MARK: - MUDeveloperToolsDelegate
