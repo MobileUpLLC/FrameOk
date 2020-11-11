@@ -41,6 +41,8 @@ open class MUViewController: UIViewController {
     open var shouldRemoveFromNavigation: Bool { return false }
 
     open var hasNavigationBar: Bool? { return nil }
+    
+    open var hasBottomBarWhenPushed: Bool { return true }
 
     open var hasScroll: Bool { return false }
 
@@ -63,6 +65,13 @@ open class MUViewController: UIViewController {
     private static var viewControllersArray: [String: MUViewControllerContainer] = [:]
 
     // MARK: Override methods
+    
+    open override func awakeFromNib() {
+        
+        super.awakeFromNib()
+        
+        hidesBottomBarWhenPushed = hasBottomBarWhenPushed == false
+    }
 
     open override func viewDidLoad() {
 
