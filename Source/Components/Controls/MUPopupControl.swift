@@ -5,7 +5,6 @@
 //  Created by Ilya B Macmini on 22.05.2019.
 //  Copyright © 2019 MobileUp LLC. All rights reserved.
 //
-// Pods: SwiftEntryKit
 
 import UIKit
 import SwiftEntryKit
@@ -117,6 +116,8 @@ open class MUPopupControl {
     open weak var controller: MUViewController?
     
     // MARK: - Public methods
+    
+    public init() { }
     
     open func setup(with controller: MUViewController) {
         
