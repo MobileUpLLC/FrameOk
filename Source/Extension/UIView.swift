@@ -104,7 +104,7 @@ public extension UIView {
     
     static private var viewDataStorage: [String: [String: Any?]] = [:]
     
-    // MARK :- Visibility
+    // MARK: - Visibility
     
     func masked(corners: UIRectCorner, radius: CGFloat) {
         
@@ -130,7 +130,7 @@ public extension UIView {
         layer.mask = maskLayer
     }
     
-    // MARK :- Subviews
+    // MARK: - Subviews
     
     func getSubview(id: String) -> UIView? {
         
@@ -382,7 +382,7 @@ public extension UIView {
         self.layer.add(animation, forKey: "position")
     }
     
-    // MARK :- Private methods
+    // MARK: - Private methods
     
     private func updateDefaultShadow() {
     
@@ -420,5 +420,18 @@ public extension UIView {
         UIGraphicsEndImageContext()
 
         return image ?? UIImage()
+    }
+}
+
+extension UIView {
+    
+    // MARK: - Localization
+    
+    @objc open func localize() {
+        
+        for subview in subviews {
+            
+            subview.localize()
+        }
     }
 }

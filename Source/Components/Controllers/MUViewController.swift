@@ -73,8 +73,6 @@ open class MUViewController: UIViewController {
         popupControl.setup(with: self)
 
         loadControl.setup(with: self)
-
-        subscribeOnCustomNotifications()
     }
 
     open override func viewWillAppear(_ animated: Bool) {
@@ -142,12 +140,10 @@ open class MUViewController: UIViewController {
         isNotificationSubscribed = false
 
         keyboardControl.unsubscribeOnNotifications()
-
-        NotificationCenter.default.removeObserver(self)
-    }
-
-    open func subscribeOnCustomNotifications() {
-
+        
+        unsubscribeOnErrorNotifications()
+        
+        unsubscribeOnAppNotification()
     }
 
     open func appDidBecomeActive() {
@@ -166,8 +162,11 @@ open class MUViewController: UIViewController {
     open func appErrorDidClear() {
 
     }
-
-    // MARK: - Public methods
+    
+    @objc open func localize() {
+        
+        view.localize()
+    }
 
     open func close(animated: Bool = true, toRoot: Bool = false, popOnly: Bool = false, completion: (() -> Void)? = nil) {
 
@@ -190,8 +189,24 @@ open class MUViewController: UIViewController {
             }
         }
     }
+    
+    deinit {
+        
+        NotificationCenter.default.removeObserver(self)
+    }
 
     // MARK: - Private methods
+    
+    private func subscribeOnLanguageNotifications() {
+        
+        NotificationCenter.default.addObserver(
+            
+            self,
+            selector : #selector(localize),
+            name     : .languageDidChange,
+            object   : nil
+        )
+    }
 
     private func configureInteractivePopGestureRecognizer() {
 
@@ -229,6 +244,12 @@ extension MUViewController: UIGestureRecognizerDelegate {
 // MARK: - Errors
 
 public extension MUViewController {
+    
+    func unsubscribeOnErrorNotifications() {
+        
+        NotificationCenter.default.removeObserver(self, name: .appErrorDidCome, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .appErrorDidClear, object: nil)
+    }
 
     func updateErrorRecipient() {
 
@@ -586,6 +607,16 @@ extension MUViewController {
 
         NotificationCenter.addObserver(self, selector: #selector(appNotification), name: .appDidBecomeActive)
         NotificationCenter.addObserver(self, selector: #selector(appNotification), name: .appWillResignActive)
+        NotificationCenter.addObserver(self, selector: #selector(appNotification), name: .appDidEnterBackground)
+        NotificationCenter.addObserver(self, selector: #selector(appNotification), name: .appWillEnterBackground)
+    }
+    
+    private func unsubscribeOnAppNotification() {
+        
+        NotificationCenter.default.removeObserver(self, name: .appDidBecomeActive, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .appWillResignActive, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .appDidEnterBackground, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .appWillEnterBackground, object: nil)
     }
 }
 
@@ -597,6 +628,7 @@ public extension Notification.Name {
     static let appWillResignActive    = Notification.Name("appWillResignActive")
     static let appDidEnterBackground  = Notification.Name("appDidEnterBackground")
     static let appWillEnterBackground = Notification.Name("appWillEnterBackground")
+    static let languageDidChange      = Notification.Name("languageDidChange")
 }
 
 // MARK: - MUViewControllerContainer
