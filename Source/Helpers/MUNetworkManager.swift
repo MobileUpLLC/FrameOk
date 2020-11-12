@@ -77,7 +77,8 @@ open class MUNetworkManager: NSObject {
         super.init()
     }
     
-    convenience init(serverUrl: String, serverTrustPolicies: [String: MUServerTrustPolicy]? = nil) {
+    public convenience init(serverUrl: String, serverTrustPolicies: [String: MUServerTrustPolicy]? = nil) {
+        
         self.init(serverTrustPolicies: serverTrustPolicies)
         
         self.serverUrl = serverUrl
