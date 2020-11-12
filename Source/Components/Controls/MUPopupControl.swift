@@ -304,6 +304,7 @@ open class MUPopupControl {
         arrowIcon                 : UIImage? = nil,
         arrowIconOffset           : CGFloat = 12,
         priority                  : Priority = .normal,
+        popupName                 : String? = nil,
         onDisappear               : (() -> Void)? = nil
     ) {
         
@@ -327,6 +328,7 @@ open class MUPopupControl {
             arrowIcon                 : arrowIcon,
             arrowIconOffset           : arrowIconOffset,
             priority                  : priority,
+            popupName                 : popupName,
             onDisappear               : onDisappear
         )
     }
@@ -387,10 +389,13 @@ open class MUPopupControl {
         arrowIcon                 : UIImage? = nil,
         arrowIconOffset           : CGFloat = 12,
         priority                  : Priority = .normal,
+        popupName                 : String? = nil,
         onDisappear               : (() -> Void)? = nil
     ) {
         
         var attributes = getAttributes(position: position)
+        
+        attributes.name = popupName
         
         attributes.positionConstraints.size = size
         
