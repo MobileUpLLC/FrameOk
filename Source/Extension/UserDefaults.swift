@@ -23,7 +23,12 @@ public extension UserDefaults {
     
     // MARK: - Public methods
     
-    class func set(_ value: Any, forKey key: String, timeout: TimeInterval? = nil) {
+    class func set(_ value: Any?, forKey key: String, timeout: TimeInterval? = nil) {
+        
+        guard let value = value else {
+            
+            return UserDefaults.standard.removeObject(forKey: key)
+        }
         
         UserDefaults.standard.set(value, forKey: key)
         
