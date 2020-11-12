@@ -19,7 +19,7 @@ public struct MUEnvironment {
     
     // MARK: - Public methods
     
-    init(index: String, title: String) {
+    public init(index: String, title: String) {
         
         self.index = index
         self.title = title
