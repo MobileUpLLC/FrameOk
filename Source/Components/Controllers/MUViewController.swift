@@ -82,6 +82,10 @@ open class MUViewController: UIViewController {
         popupControl.setup(with: self)
 
         loadControl.setup(with: self)
+        
+        localize()
+        
+        subscribeOnLanguageNotifications()
     }
 
     open override func viewWillAppear(_ animated: Bool) {
