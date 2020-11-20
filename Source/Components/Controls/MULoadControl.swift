@@ -170,7 +170,12 @@ open class MULoadControl: NSObject {
         
         view.hideSkeleton(transition: .none)
         
-        controller?.objects = controller?.objects ?? []
+        if let objects = controller?.objects, objects.contains(where: { $0 is MUEmptyModel }) {
+            
+            controller?.objects = []
+        } else {
+            controller?.objects = controller?.objects ?? []
+        }
     }
     
     private func createEmptyItems() -> [MUModel] {
