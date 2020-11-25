@@ -90,7 +90,7 @@ open class MULoadControl: NSObject {
         
         updateEmptyEmptyItems()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + (isLoading ? 0.01 : 0.3)) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + (isLoading ? 0.1 : 0.3)) { [weak self] in
             
             self?.updateLoading()
         }
