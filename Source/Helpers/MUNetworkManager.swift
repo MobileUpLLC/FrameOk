@@ -191,6 +191,8 @@ open class MUNetworkManager: NSObject {
         failure        : @escaping (MUNetworkError?,Any?) -> Void
     ) {
         
+        logResponse(with: responseObject, requestId: requestId)
+        
         if responseObject.response?.statusCode == nil, let error = responseObject.result.error as NSError? {
             
             switch error.code {
@@ -254,6 +256,23 @@ open class MUNetworkManager: NSObject {
     }
     
     // MARK: - Log methods
+    
+    private func logResponse(with responseObject: DataResponse<Any>, requestId: Int) {
+        
+        let body = responseObject.result.value as? NSDictionary ?? responseObject.result.value as? NSArray
+        
+        let logDictionary = [
+            
+            "Body" : body ?? responseObject.result.value ?? ""
+        ]
+        
+        let statusCode = responseObject.response?.statusCode ?? -1
+        
+        DispatchQueue.global().async {
+            
+            Log.event("\n[\(requestId)] Response (code: \(statusCode)):\n\(logDictionary)\n".unescapingUnicodeCharacters)
+        }
+    }
     
     private func getRequestId() -> Int {
         
@@ -412,3 +431,20 @@ public enum MUServerTrustPolicy {
     case disableEvaluation
     case customEvaluation((_ serverTrust: SecTrust, _ host: String) -> Bool)
 }
+
+// MARK: - String
+
+extension String {
+    
+    var unescapingUnicodeCharacters: String {
+        
+        let string = self.replace(pattern: "\\\\U", with: "\\\\u")
+        
+        let mutableString = NSMutableString(string: string as NSString)
+        
+        CFStringTransform(mutableString, nil, "Any-Hex/Java" as NSString, true)
+        
+        return mutableString as String
+    }
+}
+
