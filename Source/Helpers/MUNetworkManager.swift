@@ -430,6 +430,13 @@ public enum MUServerTrustPolicy {
     case pinPublicKeys(publicKeys: [SecKey], validateCertificateChain: Bool, validateHost: Bool)
     case disableEvaluation
     case customEvaluation((_ serverTrust: SecTrust, _ host: String) -> Bool)
+    
+    // MARK: - Public methods
+    
+    func publicKeys() -> [SecKey] {
+        
+        return ServerTrustPolicy.publicKeys()
+    }
 }
 
 // MARK: - String
