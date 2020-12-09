@@ -196,7 +196,7 @@ open class MUNetworkManager: NSObject {
         if responseObject.response?.statusCode == nil, let error = responseObject.result.error as NSError? {
             
             switch error.code {
-            case -999         : return
+            case -999         : failure(MUNetworkError.unknownError, nil)
             case -1009, -1005 : failure(MUNetworkError.connectionError, nil)
             default           : failure(MUNetworkError.serverError, nil)
             }
