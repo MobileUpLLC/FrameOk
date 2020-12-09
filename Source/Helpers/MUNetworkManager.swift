@@ -433,7 +433,7 @@ public enum MUServerTrustPolicy {
     
     // MARK: - Public methods
     
-    func publicKeys() -> [SecKey] {
+    public func publicKeys() -> [SecKey] {
         
         return ServerTrustPolicy.publicKeys()
     }
