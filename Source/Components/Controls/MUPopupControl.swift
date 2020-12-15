@@ -23,6 +23,17 @@ open class MUPopupControl {
         case scale
     }
     
+    // MARK: - StatusBar
+    
+    public enum StatusBar {
+        
+        case ignored
+        case hidden
+        case dark
+        case light
+        case inferred
+    }
+    
     //MARK: - ScreenInteraction
 
     public enum ScreenInteractionType {
@@ -299,6 +310,7 @@ open class MUPopupControl {
         isClosedOnBackgroundTouch : Bool,
         isClosedOnSwipe           : Bool,
         isShadowEnabled           : Bool,
+        statusBar                 : StatusBar = .inferred,
         widthRatio                : CGFloat,
         heightRatio               : CGFloat,
         arrowIcon                 : UIImage? = nil,
@@ -324,6 +336,7 @@ open class MUPopupControl {
             isClosedOnBackgroundTouch : isClosedOnBackgroundTouch,
             isClosedOnSwipe           : isClosedOnSwipe,
             isShadowEnabled           : isShadowEnabled,
+            statusBar                 : statusBar,
             size                      : size,
             arrowIcon                 : arrowIcon,
             arrowIconOffset           : arrowIconOffset,
@@ -343,6 +356,7 @@ open class MUPopupControl {
         isClosedOnBackgroundTouch : Bool,
         isClosedOnSwipe           : Bool,
         isShadowEnabled           : Bool,
+        statusBar                 : StatusBar,
         widthRatio                : CGFloat,
         topOffset                 : CGFloat,
         arrowIcon                 : UIImage? = nil,
@@ -367,6 +381,7 @@ open class MUPopupControl {
             isClosedOnBackgroundTouch : isClosedOnBackgroundTouch,
             isClosedOnSwipe           : isClosedOnSwipe,
             isShadowEnabled           : isShadowEnabled,
+            statusBar                 : statusBar,
             size                      : size,
             arrowIcon                 : arrowIcon,
             arrowIconOffset           : arrowIconOffset,
@@ -385,6 +400,7 @@ open class MUPopupControl {
         isClosedOnBackgroundTouch : Bool,
         isClosedOnSwipe           : Bool,
         isShadowEnabled           : Bool,
+        statusBar                 : StatusBar,
         size                      : EKAttributes.PositionConstraints.Size,
         arrowIcon                 : UIImage? = nil,
         arrowIconOffset           : CGFloat = 12,
@@ -396,6 +412,8 @@ open class MUPopupControl {
         var attributes = getAttributes(position: position)
         
         attributes.name = popupName
+        
+        attributes.statusBar = getStatusBarStyle(statusBar: statusBar)
         
         attributes.positionConstraints.size = size
         
@@ -460,6 +478,18 @@ open class MUPopupControl {
         case .top    : return EKAttributes.topFloat
         case .center : return EKAttributes.centerFloat
         case .bottom : return EKAttributes.bottomFloat
+        }
+    }
+    
+    private func getStatusBarStyle(statusBar: StatusBar) -> EKAttributes.StatusBar {
+        
+        switch statusBar {
+        
+        case .ignored  : return .ignored
+        case .hidden   : return .hidden
+        case .dark     : return .dark
+        case .light    : return .light
+        case .inferred : return .inferred
         }
     }
     
@@ -636,6 +666,7 @@ public extension MUViewController {
         isClosedOnBackgroundTouch : Bool = true,
         isClosedOnSwipe           : Bool = false,
         isShadowEnabled           : Bool = true,
+        statusBar                 : MUPopupControl.StatusBar = .inferred,
         widthRatio                : CGFloat = 1.0,
         heightRatio               : CGFloat = 0.6,
         arrowIcon                 : UIImage? = nil,
@@ -652,6 +683,7 @@ public extension MUViewController {
             isClosedOnBackgroundTouch : isClosedOnBackgroundTouch,
             isClosedOnSwipe           : isClosedOnSwipe,
             isShadowEnabled           : isShadowEnabled,
+            statusBar                 : statusBar,
             widthRatio                : widthRatio,
             heightRatio               : heightRatio,
             arrowIcon                 : arrowIcon,
