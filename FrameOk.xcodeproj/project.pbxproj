@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		86227071C00F219589260867 /* Pods_FrameOk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3196FAC57D3192261A7E66F /* Pods_FrameOk.framework */; };
+		D75309F2259382E300720FE9 /* MUDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75309F1259382E300720FE9 /* MUDevice.swift */; };
 		E68BB4EC255183740074D4E4 /* MUDevelopData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68BB4EB255183740074D4E4 /* MUDevelopData.swift */; };
 		E6B91A302550136100DE968B /* UIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B919E82550136100DE968B /* UIScrollView.swift */; };
 		E6B91A312550136100DE968B /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6B919E92550136100DE968B /* CALayer.swift */; };
@@ -84,6 +85,7 @@
 		2219BADA9AF5639973522B55 /* Pods-FrameOk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FrameOk.release.xcconfig"; path = "Target Support Files/Pods-FrameOk/Pods-FrameOk.release.xcconfig"; sourceTree = "<group>"; };
 		B2FF1B4C95A94724D8C0E14D /* Pods-FrameOk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FrameOk.debug.xcconfig"; path = "Target Support Files/Pods-FrameOk/Pods-FrameOk.debug.xcconfig"; sourceTree = "<group>"; };
 		B3196FAC57D3192261A7E66F /* Pods_FrameOk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FrameOk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D75309F1259382E300720FE9 /* MUDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MUDevice.swift; sourceTree = "<group>"; };
 		E68BB4EB255183740074D4E4 /* MUDevelopData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MUDevelopData.swift; sourceTree = "<group>"; };
 		E6B919482550127F00DE968B /* FrameOk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FrameOk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6B919E82550136100DE968B /* UIScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIScrollView.swift; sourceTree = "<group>"; };
@@ -325,6 +327,7 @@
 			children = (
 				E6B91A192550136100DE968B /* MUDeveloperToolsController.swift */,
 				E6B91A1A2550136100DE968B /* MULogsController.swift */,
+				D75309F1259382E300720FE9 /* MUDevice.swift */,
 			);
 			path = DeveloperTools;
 			sourceTree = "<group>";
@@ -528,6 +531,7 @@
 				E68BB4EC255183740074D4E4 /* MUDevelopData.swift in Sources */,
 				E6B91A682550136100DE968B /* MUAuthenticationManager.swift in Sources */,
 				E6B91A592550136100DE968B /* MUKeyboardControl.swift in Sources */,
+				D75309F2259382E300720FE9 /* MUDevice.swift in Sources */,
 				E6B91A562550136100DE968B /* MUActivityIndicatorControl.swift in Sources */,
 				E6B91A502550136100DE968B /* MUListController.swift in Sources */,
 				E6B91A642550136100DE968B /* MUErrorManager.swift in Sources */,
