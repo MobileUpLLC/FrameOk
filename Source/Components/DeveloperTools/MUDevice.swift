@@ -1,6 +1,6 @@
 //
 //  MUDevice.swift
-//  FrameOk
+//  FrameOk 
 //
 //  Created by Denis Sushkov on 23.12.2020.
 //
