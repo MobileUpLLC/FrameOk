@@ -16,6 +16,7 @@ def pods
     pod 'PhoneNumberKit'
     pod 'XCGLogger', '~> 6.1.0'
     pod 'GCDWebServer', '~> 3.0'
+    pod 'DeviceKit', '~> 4.0'
 
     # UI
 
