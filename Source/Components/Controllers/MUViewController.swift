@@ -182,23 +182,31 @@ open class MUViewController: UIViewController {
     }
 
     open func close(animated: Bool = true, toRoot: Bool = false, popOnly: Bool = false, completion: (() -> Void)? = nil) {
+        
+        var completionMethod = completion
 
-        popupControl.dismiss()
+        popupControl.dismiss(with: {
+            
+            completionMethod?()
+            
+            completionMethod = nil
+            
+        })
 
         if let presentingMUViewController = presentingViewController, popOnly == false {
 
             presentingMUViewController.dismiss(animated: animated)
 
-            completion?()
+            completionMethod?()
         }
 
         else if let navigationController = navigationController, navigationController.viewControllers.count > 1 {
 
             if toRoot {
 
-                navigationController.popToRootViewController(animated: animated, completion: completion)
+                navigationController.popToRootViewController(animated: animated, completion: completionMethod)
             } else {
-                navigationController.popViewController(animated: animated, completion: completion)
+                navigationController.popViewController(animated: animated, completion: completionMethod)
             }
         }
     }
