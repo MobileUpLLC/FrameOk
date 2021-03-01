@@ -41,6 +41,8 @@ open class MUViewController: UIViewController {
     open var shouldRemoveFromNavigation: Bool { return false }
 
     open var hasNavigationBar: Bool? { return nil }
+    
+    open var hasBottomBarWhenPushed: Bool { return true }
 
     open var hasScroll: Bool { return false }
 
@@ -63,6 +65,13 @@ open class MUViewController: UIViewController {
     private static var viewControllersArray: [String: MUViewControllerContainer] = [:]
 
     // MARK: Override methods
+    
+    open override func awakeFromNib() {
+        
+        super.awakeFromNib()
+        
+        hidesBottomBarWhenPushed = hasBottomBarWhenPushed == false
+    }
 
     open override func viewDidLoad() {
 
@@ -73,8 +82,10 @@ open class MUViewController: UIViewController {
         popupControl.setup(with: self)
 
         loadControl.setup(with: self)
-
-        subscribeOnCustomNotifications()
+        
+        localize()
+        
+        subscribeOnLanguageNotifications()
     }
 
     open override func viewWillAppear(_ animated: Bool) {
@@ -84,8 +95,6 @@ open class MUViewController: UIViewController {
         configureNavigationBar()
 
         updateViewControllersArray()
-
-        configureNavigatioBar()
 
         configureInteractivePopGestureRecognizer()
 
@@ -126,7 +135,7 @@ open class MUViewController: UIViewController {
 
     // MARK: - Public methods
 
-    func subscribeOnNotifications() {
+    open func subscribeOnNotifications() {
 
         guard isVisible, isNotificationSubscribed == false else { return }
 
@@ -139,67 +148,85 @@ open class MUViewController: UIViewController {
         subscribeOnAppNotifications()
     }
 
-    func unsubscribeFromNotifications() {
+    open func unsubscribeFromNotifications() {
 
         isNotificationSubscribed = false
 
         keyboardControl.unsubscribeOnNotifications()
-
-        NotificationCenter.default.removeObserver(self)
+        
+        unsubscribeOnErrorNotifications()
+        
+        unsubscribeOnAppNotification()
     }
 
-    func subscribeOnCustomNotifications() {
-
-    }
-
-    func appDidBecomeActive() {
-
-    }
-
-    func appWillResignActive() {
+    open func appDidBecomeActive() {
 
     }
 
-    func appErrorDidBecome(error: Error) {
+    open func appWillResignActive() {
+
+    }
+
+    open func appErrorDidBecome(error: Error) {
 
         isLoading = false
     }
 
-    func appErrorDidClear() {
+    open func appErrorDidClear() {
 
     }
+    
+    @objc open func localize() {
+        
+        view.localize()
+    }
 
-    // MARK: - Public methods
+    open func close(animated: Bool = true, toRoot: Bool = false, popOnly: Bool = false, completion: (() -> Void)? = nil) {
+        
+        var completionMethod = completion
 
-    func close(animated: Bool = true, toRoot: Bool = false, popOnly: Bool = false, completion: (() -> Void)? = nil) {
-
-        popupControl.dismiss()
+        popupControl.dismiss(with: {
+            
+            completionMethod?()
+            
+            completionMethod = nil
+            
+        })
 
         if let presentingMUViewController = presentingViewController, popOnly == false {
 
             presentingMUViewController.dismiss(animated: animated)
 
-            completion?()
+            completionMethod?()
         }
 
         else if let navigationController = navigationController, navigationController.viewControllers.count > 1 {
 
             if toRoot {
 
-                navigationController.popToRootViewController(animated: animated, completion: completion)
+                navigationController.popToRootViewController(animated: animated, completion: completionMethod)
             } else {
-                navigationController.popViewController(animated: animated, completion: completion)
+                navigationController.popViewController(animated: animated, completion: completionMethod)
             }
         }
     }
+    
+    deinit {
+        
+        NotificationCenter.default.removeObserver(self)
+    }
 
     // MARK: - Private methods
-
-    private func configureNavigatioBar() {
-
-        guard let hasNavigationBar = hasNavigationBar else { return }
-
-        navigationController?.setNavigationBarHidden(hasNavigationBar == false, animated: true)
+    
+    private func subscribeOnLanguageNotifications() {
+        
+        NotificationCenter.default.addObserver(
+            
+            self,
+            selector : #selector(localize),
+            name     : .languageDidChange,
+            object   : nil
+        )
     }
 
     private func configureInteractivePopGestureRecognizer() {
@@ -238,6 +265,12 @@ extension MUViewController: UIGestureRecognizerDelegate {
 // MARK: - Errors
 
 public extension MUViewController {
+    
+    func unsubscribeOnErrorNotifications() {
+        
+        NotificationCenter.default.removeObserver(self, name: .appErrorDidCome, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .appErrorDidClear, object: nil)
+    }
 
     func updateErrorRecipient() {
 
@@ -307,7 +340,7 @@ public extension MUViewController {
         return MUViewController.viewControllersArray["\(T.self)"]?.controller as? T
     }
 
-    static func getInstantiate<T: MUViewController>(with type: T.Type) -> T? {
+    static func getInstance<T: MUViewController>(with type: T.Type) -> T? {
 
         switch T.initMethod {
         case .fromNib        : return T.instantiate()
@@ -316,7 +349,7 @@ public extension MUViewController {
         }
     }
 
-    static func getInstantiate<T: MUViewController>() -> T? {
+    static func getInstance<T: MUViewController>() -> T? {
 
         guard storyboardName != "" else {
 
@@ -348,16 +381,16 @@ public extension MUViewController {
         setup          : ((T) -> Void)? = nil
     ) {
 
-        guard let instantiate = T.getInstantiate(with: T.self) else {
+        guard let instance = T.getInstance(with: T.self) else {
 
             return
         }
 
-        setup?(instantiate)
+        setup?(instance)
 
         push(
 
-            with           : instantiate,
+            with           : instance,
             animated       : animated,
             pushCompletion : pushCompletion
         )
@@ -373,18 +406,18 @@ public extension MUViewController {
 
     ) {
 
-        guard let instantiate = T.getInstantiate(with: T.self) else {
+        guard let instance = T.getInstance(with: T.self) else {
 
             return
         }
 
-        setup?(instantiate)
+        setup?(instance)
 
-        var presentedController: UIViewController = instantiate
+        var presentedController: UIViewController = instance
 
         if withNavigation {
 
-            presentedController = instantiate.addNavigation()
+            presentedController = instance.addNavigation()
         }
 
         if let style = style {
@@ -405,16 +438,16 @@ public extension MUViewController {
         setup          : ((T) -> Void)?  = nil)
     {
 
-        guard let instantiate: T = getInstantiate() as? T  else {
+        guard let instance: T = getInstance() as? T  else {
 
-            return Log.error("failed to create instantiate for \(self)")
+            return Log.error("failed to create instance for \(self)")
         }
 
-        setup?(instantiate)
+        setup?(instance)
 
         controller?.push(
 
-            with           : instantiate,
+            with           : instance,
             animated       : animated,
             pushCompletion : pushCompletion
         )
@@ -431,26 +464,26 @@ public extension MUViewController {
 
         ) {
 
-        guard let instantiate: T = getInstantiate()  else {
+        guard let instance: T = getInstance()  else {
 
             return
         }
 
-        setup?(instantiate)
+        setup?(instance)
 
-        var presentedController: UIViewController = instantiate
+        var presentedController: UIViewController = instance
 
         if asRoot {
 
             if let navigationController = findNavigationController(storyboardName: storyboardName) {
 
-                navigationController.setViewControllers([instantiate], animated: false)
+                navigationController.setViewControllers([instance], animated: false)
 
                 presentedController = navigationController
 
             } else {
 
-                presentedController = createNavigationController(with: instantiate)
+                presentedController = createNavigationController(with: instance)
             }
         }
 
@@ -471,40 +504,40 @@ public extension MUViewController {
         setup                 : ((T) -> Void)?  = nil
     ) {
 
-        guard let instantiate: T = screen.getInstantiate() else {
+        guard let instance: T = screen.getInstance() else {
 
             return
         }
 
-        setup?(instantiate)
+        setup?(instance)
 
-        addChild(instantiate)
+        addChild(instance)
 
-        instantiate.didMove(toParent: self)
+        instance.didMove(toParent: self)
 
         if let appendTargetView = appendTargetView {
 
-            instantiate.view.frame = appendTargetView.frame
+            instance.view.frame = appendTargetView.frame
 
-            view.insertSubview(instantiate.view, aboveSubview: appendTargetView)
+            view.insertSubview(instance.view, aboveSubview: appendTargetView)
 
         } else {
 
-            (insertTargetView ?? view).addSubview(instantiate.view)
+            (insertTargetView ?? view).addSubview(instance.view)
         }
 
-        instantiate.view.appendConstraints(to: insertTargetView ?? view)
+        instance.view.appendConstraints(to: insertTargetView ?? view)
     }
 
-    func insert(controller instantiate: UIViewController, into insertTargetView: UIView? = nil) {
+    func insert(controller instance: UIViewController, into insertTargetView: UIView? = nil) {
 
-        addChild(instantiate)
+        addChild(instance)
 
-        (insertTargetView ?? view).addSubview(instantiate.view)
+        (insertTargetView ?? view).addSubview(instance.view)
 
-        instantiate.view.appendConstraints(to: insertTargetView ?? view)
+        instance.view.appendConstraints(to: insertTargetView ?? view)
 
-        instantiate.didMove(toParent: self)
+        instance.didMove(toParent: self)
     }
 
     func remove(child controller: UIViewController) {
@@ -595,6 +628,16 @@ extension MUViewController {
 
         NotificationCenter.addObserver(self, selector: #selector(appNotification), name: .appDidBecomeActive)
         NotificationCenter.addObserver(self, selector: #selector(appNotification), name: .appWillResignActive)
+        NotificationCenter.addObserver(self, selector: #selector(appNotification), name: .appDidEnterBackground)
+        NotificationCenter.addObserver(self, selector: #selector(appNotification), name: .appWillEnterBackground)
+    }
+    
+    private func unsubscribeOnAppNotification() {
+        
+        NotificationCenter.default.removeObserver(self, name: .appDidBecomeActive, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .appWillResignActive, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .appDidEnterBackground, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .appWillEnterBackground, object: nil)
     }
 }
 
@@ -606,6 +649,7 @@ public extension Notification.Name {
     static let appWillResignActive    = Notification.Name("appWillResignActive")
     static let appDidEnterBackground  = Notification.Name("appDidEnterBackground")
     static let appWillEnterBackground = Notification.Name("appWillEnterBackground")
+    static let languageDidChange      = Notification.Name("languageDidChange")
 }
 
 // MARK: - MUViewControllerContainer

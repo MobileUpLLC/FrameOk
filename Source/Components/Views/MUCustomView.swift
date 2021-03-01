@@ -131,7 +131,7 @@ open class MUCustomView: MUView {
         
         if nib == nil {
             
-            nib = UINib(nibName: nibName, bundle: Bundle(for: MUCustomView.self))
+            nib = UINib(nibName: nibName, bundle: Bundle(for: type(of: self)))
             
             MUCustomView.nibCache[nibName] = nib
         }

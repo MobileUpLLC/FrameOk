@@ -8,11 +8,11 @@
 
 import UIKit
 
-// MARK: LayoutInsets
+// MARK: - LayoutInsets
 
 public struct LayoutInsets {
 
-    // MARK: Public properites
+    // MARK: - Public properites
     
     static var zero: LayoutInsets { self.init(top: 0, left: 0, bottom: 0, right: 0) }
 
@@ -24,9 +24,9 @@ public struct LayoutInsets {
 
     public var right: CGFloat?
 
-    // MARK: Public methods
+    // MARK: - Public methods
 
-    static func insets(
+    public static func insets(
         top    : CGFloat?  = 0,
         left   : CGFloat?  = 0,
         bottom : CGFloat?  = 0,
@@ -37,22 +37,31 @@ public struct LayoutInsets {
     }
 }
 
-// MARK: LayoutDimension
+// MARK: - LayoutDimension
 
-struct LayoutDimension: OptionSet {
+public struct LayoutDimension: OptionSet {
 
-    let rawValue: Int
+    // MARK: - Public properties
+    
+    public let rawValue: Int
 
-    static let height = LayoutDimension(rawValue: 1)
+    public static let height = LayoutDimension(rawValue: 1)
 
-    static let width = LayoutDimension(rawValue: 2)
+    public static let width = LayoutDimension(rawValue: 2)
+    
+    // MARK: - Public methods
+    
+    public init(rawValue: Int) {
+        
+        self.rawValue = rawValue
+    }
 }
 
-// MARK: AutoLayout Extensions
+// MARK: - AutoLayout Extensions
 
-extension UIView {
+public extension UIView {
 
-    // MARK: Layout Subview
+    // MARK: - Layout Subview
 
     func layoutCenter(_ view: UIView, xOffset: CGFloat = 0, yOffset: CGFloat = 0) {
 
@@ -141,7 +150,7 @@ extension UIView {
         }
     }
 
-    // MARK: Find Constraint
+    // MARK: - Find Constraint
 
     func findConstraint(byId id: String) -> NSLayoutConstraint? {
 
@@ -196,7 +205,7 @@ extension UIView {
         return nil
     }
 
-    // MARK: Set Constraint
+    // MARK: - Set Constraint
 
     func setConstraint(type: NSLayoutConstraint.Attribute, value: CGFloat, updateSuperview: Bool = true) {
 
@@ -260,10 +269,10 @@ extension UIView {
     }
 }
 
-// MARK: Anchors
+// MARK: - Anchors
 
 @available(iOS 11.0, *)
-extension UIView {
+public extension UIView {
 
     func getTopAnchor(safe: Bool) -> NSLayoutYAxisAnchor {
 
@@ -286,9 +295,9 @@ extension UIView {
     }
 }
 
-// MARK: NSLayoutAnchor
+// MARK: - NSLayoutAnchor
 
-extension NSLayoutAnchor {
+public extension NSLayoutAnchor {
 
     @objc func makeConstraint(equalTo anchor: NSLayoutAnchor<AnchorType>, constant: CGFloat) {
 

@@ -12,8 +12,18 @@ import UIKit
 
 public struct MUEnvironment {
 
-    let index: String
-    let title: String
+    // MARK: - Public properties
+    
+    public let index: String
+    public let title: String
+    
+    // MARK: - Public methods
+    
+    public init(index: String, title: String) {
+        
+        self.index = index
+        self.title = title
+    }
 }
 
 // MARK: - MUDeveloperToolsDelegate
@@ -226,14 +236,21 @@ public extension MUDeveloperToolsManager {
             topController.dismiss(animated: true, completion: nil)
             
         } else {
-            
-            guard let controller = MUDeveloperToolsController.instantiate(storyboardName: "DeveloperTools", identifier: "MUDeveloperToolsController", bundle: Bundle(for: self)) else { return }
+                                    
+            let controller = MUDeveloperToolsController.instantiate(
+                
+                storyboardName : "DeveloperTools",
+                identifier     : "MUDeveloperToolsController",
+                bundle         : Bundle(for: MUDeveloperToolsController.self)
+            )
+    
+            guard let developerToolsController = controller else { return }
 
             MUPopupControl.closeAll()
             
-            controller.modalPresentationStyle = .overCurrentContext
+            developerToolsController.modalPresentationStyle = .overCurrentContext
             
-            topController.present(controller, animated: true, completion: nil)
+            topController.present(developerToolsController, animated: true, completion: nil)
         }
     }
 }

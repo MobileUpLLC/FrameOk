@@ -84,14 +84,17 @@ open class MURefreshControl: NSObject {
     }
     
     private func configure(with tintColor: UIColor? = nil) {
+                
+        if refreshControl == nil {
         
-        refreshControl = UIRefreshControl()
+            refreshControl = UIRefreshControl()
+            
+            refreshControl?.addTarget(self, action: #selector(startAnimation), for: .valueChanged)
+            
+            scrollView?.addSubview(refreshControl!)
+        }
         
-        refreshControl!.tintColor = tintColor ?? refreshControl!.tintColor
-        
-        refreshControl!.addTarget(self, action: #selector(startAnimation), for: .valueChanged)
-        
-        scrollView?.addSubview(refreshControl!)
+        refreshControl?.tintColor = tintColor ?? refreshControl?.tintColor
     }
     
     private func resetTopContentInset() {

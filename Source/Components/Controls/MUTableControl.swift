@@ -709,7 +709,10 @@ extension MUTableControl: UITableViewDelegate, UITableViewDataSource {
             delegate?.cellDidSelected(for: object, at: indexPath)
         }
         
-        tableView.deselectRow(at: indexPath, animated: true)
+        if controller?.shouldDeselectRow ?? false {
+            
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
     }
     
     public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

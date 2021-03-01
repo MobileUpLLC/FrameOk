@@ -115,7 +115,10 @@ extension MUCollectionControl:
             delegate?.cellDidSelected(for: object, at: indexPath)
         }
         
-        collectionView.deselectItem(at: indexPath, animated: true)
+        if controller?.shouldDeselectRow ?? false {
+        
+            collectionView.deselectItem(at: indexPath, animated: true)
+        }
     }
     
     public func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {

@@ -259,28 +259,28 @@ open class MUFormController: MUViewController {
 
 extension MUFormController: MUTextFieldViewDelegate {
     
-    public func textFieldViewChanged(_ textFieldView: UIView) {
+    open func textFieldViewChanged(_ textFieldView: UIView) {
         
         validateWhenEditing()
         
         fieldChanged(textFieldView)
     }
     
-    public func textFieldViewBeginEditing(_ textFieldView: UIView) {
+    open func textFieldViewBeginEditing(_ textFieldView: UIView) {
         
         activeEditedField = textFieldView
         
         fieldBeginEditing(textFieldView)
     }
     
-    public func textFieldViewDidEndEditing(_ textFieldView: UIView) {
+    open func textFieldViewDidEndEditing(_ textFieldView: UIView) {
         
         activeEditedField = nil
         
         validate()
     }
     
-    public func textFieldViewShouldReturn(_ textFieldView: UIView) {
+    open func textFieldViewShouldReturn(_ textFieldView: UIView) {
         
         for (index, object) in verifyObjects.enumerated() {
             
@@ -309,7 +309,7 @@ extension MUFormController: MUTextFieldViewDelegate {
         }
     }
     
-    public func textFieldViewBackwardDidTap(_ textFieldView: UIView) {
+    open func textFieldViewBackwardDidTap(_ textFieldView: UIView) {
         
         deleteBackward(textFieldView)
     }

@@ -46,7 +46,7 @@ open class MUNetworkManager: NSObject {
     
     // MARK: - Override methods
     
-    init(serverTrustPolicies: [String: MUServerTrustPolicy]? = nil) {
+    public init(serverTrustPolicies: [String: MUServerTrustPolicy]? = nil) {
 
         let configuration = URLSessionConfiguration.default
         
@@ -77,7 +77,8 @@ open class MUNetworkManager: NSObject {
         super.init()
     }
     
-    convenience init(serverUrl: String, serverTrustPolicies: [String: MUServerTrustPolicy]? = nil) {
+    public convenience init(serverUrl: String, serverTrustPolicies: [String: MUServerTrustPolicy]? = nil) {
+        
         self.init(serverTrustPolicies: serverTrustPolicies)
         
         self.serverUrl = serverUrl
@@ -190,10 +191,12 @@ open class MUNetworkManager: NSObject {
         failure        : @escaping (MUNetworkError?,Any?) -> Void
     ) {
         
+        logResponse(with: responseObject, requestId: requestId)
+        
         if responseObject.response?.statusCode == nil, let error = responseObject.result.error as NSError? {
             
             switch error.code {
-            case -999         : return
+            case -999         : failure(MUNetworkError.unknownError, nil)
             case -1009, -1005 : failure(MUNetworkError.connectionError, nil)
             default           : failure(MUNetworkError.serverError, nil)
             }
@@ -253,6 +256,23 @@ open class MUNetworkManager: NSObject {
     }
     
     // MARK: - Log methods
+    
+    private func logResponse(with responseObject: DataResponse<Any>, requestId: Int) {
+        
+        let body = responseObject.result.value as? NSDictionary ?? responseObject.result.value as? NSArray
+        
+        let logDictionary = [
+            
+            "Body" : body ?? responseObject.result.value ?? ""
+        ]
+        
+        let statusCode = responseObject.response?.statusCode ?? -1
+        
+        DispatchQueue.global().async {
+            
+            Log.event("\n[\(requestId)] Response (code: \(statusCode)):\n\(logDictionary)\n".unescapingUnicodeCharacters)
+        }
+    }
     
     private func getRequestId() -> Int {
         
@@ -318,14 +338,14 @@ public extension MUNetworkManager {
 
 public struct MUNetworkRequest {
     
-    var url      : String
-    var method   : MUNetworkHttpMethod
-    var headers  : [String : String]?   = nil
-    var params   : [String : Any]?      = nil
-    var body     : Any?                 = nil
-    var encoding : MUNetworkEncoding    = .url
-    var success  : ((Any) -> Void)?     = nil
-    var failure  : ((Error?) -> Void)?  = nil
+    public var url      : String
+    public var method   : MUNetworkHttpMethod
+    public var headers  : [String : String]?   = nil
+    public var params   : [String : Any]?      = nil
+    public var body     : Any?                 = nil
+    public var encoding : MUNetworkEncoding    = .url
+    public var success  : ((Any) -> Void)?     = nil
+    public var failure  : ((Error?) -> Void)?  = nil
 }
 
 // MARK: - MUNetworkManager
@@ -410,4 +430,28 @@ public enum MUServerTrustPolicy {
     case pinPublicKeys(publicKeys: [SecKey], validateCertificateChain: Bool, validateHost: Bool)
     case disableEvaluation
     case customEvaluation((_ serverTrust: SecTrust, _ host: String) -> Bool)
+    
+    // MARK: - Public methods
+    
+    public static func publicKeys() -> [SecKey] {
+        
+        return ServerTrustPolicy.publicKeys()
+    }
 }
+
+// MARK: - String
+
+extension String {
+    
+    var unescapingUnicodeCharacters: String {
+        
+        let string = self.replace(pattern: "\\\\U", with: "\\\\u")
+        
+        let mutableString = NSMutableString(string: string as NSString)
+        
+        CFStringTransform(mutableString, nil, "Any-Hex/Java" as NSString, true)
+        
+        return mutableString as String
+    }
+}
+

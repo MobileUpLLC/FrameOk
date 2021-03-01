@@ -178,13 +178,13 @@ open class MUPaginationControl: NSObject {
     
     @objc private func createIndicator(with timer: Timer? = nil) {
         
-        guard let targetView = targetView, self.bottomActivityIndicator == nil else { return }
+        guard let targetView = targetView, bottomActivityIndicator == nil, hasMoreObjects == true else { return }
         
         guard isDeleting == false else { return }
         
         bottomActivityIndicator?.containerView?.removeFromSuperview()
         
-        self.bottomActivityIndicator = getIndicator(in: targetView)
+        bottomActivityIndicator = getIndicator(in: targetView)
 
         makeBottomInset(in: targetView)
     }

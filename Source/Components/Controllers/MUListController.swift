@@ -76,6 +76,8 @@ open class MUListController: MUViewController, MUListControlDelegate, MUReusable
 
     open var emptyStateStyle: MUEmptyStateControl.Style { .none }
     
+    open var shouldDeselectRow: Bool { return true }
+    
     open var hasCache: Bool { return false }
     
     open var cacheKey: String? { return nil }

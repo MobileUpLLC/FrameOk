@@ -90,7 +90,7 @@ open class MULoadControl: NSObject {
         
         updateEmptyEmptyItems()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + (isLoading ? 0.01 : 0.3)) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + (isLoading ? 0.1 : 0.3)) { [weak self] in
             
             self?.updateLoading()
         }
@@ -170,7 +170,7 @@ open class MULoadControl: NSObject {
         
         view.hideSkeleton(transition: .none)
         
-        controller?.objects = controller?.objects ?? []
+        controller?.objects = controller?.objects.filter { ($0 is MUEmptyModel) == false } ?? []
     }
     
     private func createEmptyItems() -> [MUModel] {
@@ -194,6 +194,6 @@ public extension UIView {
 
 // MARK: - MUEmptyModel
 
-public class MUEmptyModel: MUModel {
+open class MUEmptyModel: MUModel {
 
 }
